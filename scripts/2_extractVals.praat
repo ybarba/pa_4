@@ -1,7 +1,7 @@
 ####################################
 # Praat script to extract values   #
 # Created by                       #
-# Joseph V. Casillas 10/26/2015    #
+# Joseph V. Casillas 04/06/2022    #
 #                                  #
 # This file will:                  #
 #  - extract vot, f1, f2 and       #

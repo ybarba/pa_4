@@ -1,7 +1,7 @@
 Programming assignment 4
 ========================
 
-# Basic info (see [website](https://www.jvcasillas.com/ru_teaching/ru_spanish_585/585_02_s2020/site_libs/assets/programming_assignments/pa4/index.html) for assignment info)
+# Basic info (see [website](https://www.spanphon.jvcasillas.com/pa4/index.html) for assignment info)
 
 This directory contains four folders:
 
@@ -35,8 +35,5 @@ Contains a template for a reproducible report.
 
 ## scripts
 
-Contains skeleton praat scripts that will help you (1) create textgrids and 
-(2) extract data from the .wav files. 
+Contains skeleton praat scripts that will help you (1) create textgrids and (2) extract data from the .wav files. 
 Pay close attention to the README file in this directory.
-
-
