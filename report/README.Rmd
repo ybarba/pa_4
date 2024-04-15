@@ -4,7 +4,7 @@ output: github_document
 
 ---
 
-**Author**: Your name here  
+**Author**: Yhosep Barba  
 **Date**: Last update: `r Sys.time()`
 
 
@@ -15,64 +15,71 @@ output: github_document
   Describe your hypotheses
 -->
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Monolingual English speakers would have a higher VOT.
+Bilinguals would have a shorter or similar VOT to monolingual Spanish Speakers (if existed). They would also show more control over F1 and F2 frequencies, exhibiting a broader vowel space in their pronounciation skills. All of this taking into account previous and more exposure to the Spanish language. 
 
 
 # Prep
 
-## Libraries
+## Libraries 
 
 ```{r}
-#| label: load-libs
-#| echo: false 
-#| warning: false 
-#| message: false
-# Load libraries here
+library(tidyverse)
 
 ```
 
 ## Load data
 
 ```{r}
-#| label: load-data
-# You need to get all the files in the 'data' directory and combine them
-# Check previous examples we did in class 
+df <- list.files(path="../data", full.names= TRUE) %>%
+  lapply(read_csv) %>%
+  bind_rows() 
 
 ```
 
 ## Tidy data
-
 ```{r}
-#| label: tidy-data
-# Convert from long to wide or wide to long format as necessary (check 
-# examples from class)
-# Create any other relevant variables here 
-
+df2 <- df %>%
+  separate("fileID", c("ID","Word")) %>%
+  select(-c(notes,data)) %>%
+  na.omit()
 ```
-
 # Analysis
 
 ## Descriptives
 
 ```{r}
-#| label: descriptive-stats
-# Give some descriptive summaries of your data 
-# Display your descriptives in a table (try knitr::kable())
-
+means <- df2 %>%
+  group_by(ID) %>%
+  summarize(avg_f1 = mean(f1),
+            sd_f1 = sd(f1),
+            avg_f2 = mean(f2),
+            sd_f2 = sd(f2),
+            avg_vot = mean(vot),
+            sd_vot = sd(vot))
+ knitr::kable(means) 
 ```
 
 ## Visualization
 
 ```{r}
-#| label: plots 
-#| fig.retina: 2
-# Include some plots here
+df2 %>%
+   ggplot() +
+   aes(x = ID, y = f1) +
+   geom_boxplot() +
+   labs(x = "ID", y = "f1") 
 
+df2 %>%
+   ggplot() +
+   aes(x = ID, y = f2) +
+   geom_boxplot() +
+   labs(x = "ID", y = "f2")
+
+df2 %>%
+   ggplot() +
+   aes(x = ID, y = vot) +
+   geom_boxplot() +
+   labs(x = "ID", y = "vot")
 ```
 
 <!-- 
@@ -88,6 +95,8 @@ If you need help consider the following sources:
   - Search the internet for HTML code (not recommended, but it works)
   - Check the code from my class presentations (may or may not be helpful)
 -->
+![An image](/Users/diegomedina/Desktop/pa_4/soundwave.pdf)
+
 
 ## Hypothesis test
 
@@ -109,11 +118,8 @@ What did you enjoy? What did you hate? What did you learn?
 What would you do differently?
 -->
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+To conclude, there is variability in the average F1 and F2 frequencies among the six participants. L2 learners and bilinguals exhibit different patterns of vowel production. I believe that with only six participants, it is difficult to determine and/or categorize vowel formants. On the other hand, VOT results matched with the hypothesis: bilinguals portray a shorter VOT compared to L2 learners. Further information would be required if we want to include exposure as an independent variable. 
+
+I enjoyed the process, I believe it was really interesting to see how, through some scripts, you are able to segment different audios (this saves a lot of time). I still struggle a little bit in understanding how codes and scripts work. I guess I would have to instruct myself during summer and find the logic behind it. In addition to this, I find R very useful, although I hate that even small mistakes do not allow to run some instructions. If I had to do something different, I would include colors to my graphs. 
 
 </br></br>
